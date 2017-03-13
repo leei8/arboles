@@ -12,6 +12,8 @@ import java.awt.Font;
 import javax.swing.JTextField;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import java.awt.Color;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class FormularioArbol extends JDialog {
 
@@ -36,8 +38,8 @@ public class FormularioArbol extends JDialog {
 	/**
 	 * Create the dialog.
 	 */
-	public FormularioArbol(javax.swing.JFrame parent,boolean modal) {
-		super(parent,modal);
+	public FormularioArbol(javax.swing.JFrame parent,String titulo, boolean modal) {
+		super(parent,titulo,modal);
 		setBounds(100, 100, 450, 300);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -112,15 +114,26 @@ public class FormularioArbol extends JDialog {
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			{
 				JButton okButton = new JButton("Guardar");
+				okButton.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent arg0) {
+		
+						String nombre = textFieldNombre.getText();
+						String zona = textFieldZona.getText();
+						double altura = Double.parseDouble(textFieldNombre.getText());
+						
+						Arbol arbol = new Arbol(nombre,zona,altura);
+					}
+				});
 				okButton.setActionCommand("OK");
 				buttonPane.add(okButton);
 				getRootPane().setDefaultButton(okButton);
-			}
+				
 			{
 				JButton cancelButton = new JButton("Cancelar");
 				cancelButton.setActionCommand("Cancel");
 				buttonPane.add(cancelButton);
 			}
+		}
 		}
 	}
 }

@@ -43,9 +43,13 @@ public class Main extends JFrame {
 	 * Create the frame.
 	 */
 	public void abrirFormularioArbol(){
-		FormularioArbol formulario = new FormularioArbol(this,true);
+		FormularioArbol formulario = new FormularioArbol(this,"Formulario árbol", true);
 		formulario.setVisible(true);
 	}
+	
+//	public void aniadirarbol (Arbol arbol){
+//		
+//	}
 	public Main() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
