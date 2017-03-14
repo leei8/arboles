@@ -119,9 +119,12 @@ public class FormularioArbol extends JDialog {
 		
 						String nombre = textFieldNombre.getText();
 						String zona = textFieldZona.getText();
-						double altura = Double.parseDouble(textFieldNombre.getText());
+						double altura = Double.parseDouble(textFieldAltura.getText());
 						
 						Arbol arbol = new Arbol(nombre,zona,altura);
+						((Main)getParent()).aniadirArbol(arbol);
+						
+						dispose();
 					}
 				});
 				okButton.setActionCommand("OK");
@@ -130,6 +133,11 @@ public class FormularioArbol extends JDialog {
 				
 			{
 				JButton cancelButton = new JButton("Cancelar");
+				cancelButton.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent arg0) {
+						dispose();
+					}
+				});
 				cancelButton.setActionCommand("Cancel");
 				buttonPane.add(cancelButton);
 			}

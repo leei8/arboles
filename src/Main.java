@@ -22,6 +22,8 @@ import javax.swing.LayoutStyle.ComponentPlacement;
 public class Main extends JFrame {
 
 	private JPanel contentPane;
+	private JComboBox comboBoxArboles;
+	
 
 	/**
 	 * Launch the application.
@@ -42,14 +44,7 @@ public class Main extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public void abrirFormularioArbol(){
-		FormularioArbol formulario = new FormularioArbol(this,"Formulario árbol", true);
-		formulario.setVisible(true);
-	}
 	
-//	public void aniadirarbol (Arbol arbol){
-//		
-//	}
 	public Main() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
@@ -62,7 +57,7 @@ public class Main extends JFrame {
 		titulo.setForeground(new Color(85, 107, 47));
 		titulo.setFont(new Font("Tahoma", Font.BOLD, 30));
 		
-		JComboBox comboBoxArboles = new JComboBox();
+		comboBoxArboles = new JComboBox();
 		
 		JButton buttonInsertarArbol = new JButton("INSERTAR ARBOL");
 		buttonInsertarArbol.addActionListener(new ActionListener() {
@@ -70,21 +65,31 @@ public class Main extends JFrame {
 				abrirFormularioArbol();
 			}
 		});
+		
+		JButton buttonEliminarArbol = new JButton("ELIMINAR ARBOL");
+		buttonEliminarArbol.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				int indice = comboBoxArboles.getSelectedIndex();
+				comboBoxArboles.removeItemAt(indice);
+			}
+		});
 		GroupLayout gl_contentPane = new GroupLayout(contentPane);
 		gl_contentPane.setHorizontalGroup(
 			gl_contentPane.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_contentPane.createSequentialGroup()
+				.addGroup(Alignment.TRAILING, gl_contentPane.createSequentialGroup()
 					.addContainerGap(141, Short.MAX_VALUE)
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-						.addGroup(Alignment.TRAILING, gl_contentPane.createSequentialGroup()
-							.addComponent(comboBoxArboles, GroupLayout.PREFERRED_SIZE, 141, GroupLayout.PREFERRED_SIZE)
-							.addGap(136))
 						.addGroup(Alignment.TRAILING, gl_contentPane.createSequentialGroup()
 							.addComponent(titulo, GroupLayout.PREFERRED_SIZE, 153, GroupLayout.PREFERRED_SIZE)
 							.addGap(130))
 						.addGroup(Alignment.TRAILING, gl_contentPane.createSequentialGroup()
-							.addComponent(buttonInsertarArbol)
-							.addGap(147))))
+							.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING, false)
+								.addComponent(buttonEliminarArbol, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+								.addComponent(buttonInsertarArbol, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+							.addGap(147))
+						.addGroup(gl_contentPane.createSequentialGroup()
+							.addComponent(comboBoxArboles, GroupLayout.PREFERRED_SIZE, 162, GroupLayout.PREFERRED_SIZE)
+							.addContainerGap())))
 		);
 		gl_contentPane.setVerticalGroup(
 			gl_contentPane.createParallelGroup(Alignment.LEADING)
@@ -92,11 +97,22 @@ public class Main extends JFrame {
 					.addContainerGap()
 					.addComponent(titulo, GroupLayout.PREFERRED_SIZE, 42, GroupLayout.PREFERRED_SIZE)
 					.addGap(29)
-					.addComponent(comboBoxArboles, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-					.addPreferredGap(ComponentPlacement.RELATED, 73, Short.MAX_VALUE)
+					.addComponent(comboBoxArboles, GroupLayout.PREFERRED_SIZE, 29, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.RELATED, 64, Short.MAX_VALUE)
 					.addComponent(buttonInsertarArbol)
-					.addGap(53))
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(buttonEliminarArbol)
+					.addGap(24))
 		);
 		contentPane.setLayout(gl_contentPane);
 	}
+	public void abrirFormularioArbol(){
+		FormularioArbol formulario = new FormularioArbol(this,"Formulario árbol", true);
+		formulario.setVisible(true);
+	}
+	
+	public void aniadirArbol (Arbol arbol){
+		this.comboBoxArboles.addItem(arbol.getNombre() + " - " + arbol.getZona() + " - " + arbol.getAltura());
+	}
 }
+
